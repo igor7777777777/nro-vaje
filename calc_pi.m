@@ -16,10 +16,10 @@ hold on;
 scatter(x(tocke_zunaj_kroznice), y(tocke_zunaj_kroznice), 50, 'blue', 'filled');
 krog(r);
 axis equal;
-title('');
-xlabel('');
-ylabel('');
-legend('');
+title('Naključno generirane točke');
+xlabel('x');
+ylabel('y');
+legend('Znotraj kroga','Izven kroga','Kroznica');
 
 function krog(r)
     alfa = linspace(0, 2 * pi, 1000);
