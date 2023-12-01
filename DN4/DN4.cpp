@@ -3,7 +3,8 @@
 #include <vector>
 #include <cmath>
 
-int main() {
+int main() 
+{
     const std::string vhodnaDatoteka = "poly.txt";
     const std::string izhodnaDatoteka = "diff_poly.txt";
 
