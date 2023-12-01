@@ -21,7 +21,7 @@ int main() {
         indata >> value1 >> colon >> value2;
         x[i] = value1;
         f[i] = value2;
-    }//for zanko po vrsticah
+    }//for zanka po vrsticah
 
     indata.close();
 
