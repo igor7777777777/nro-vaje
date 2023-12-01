@@ -1,49 +1,51 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 int main() {
-    std::string poly = "poly.txt";
-    std::string diff_poly = "diff_poly.txt";
+    const std::string vhodnaDatoteka = "poly.txt";
+    const std::string izhodnaDatoteka = "diff_poly.txt";
 
-    std::ofstream outdata(diff_poly);
-    std::ifstream indata(poly);
+    std::ifstream vhodnaDatotekaObjekt(vhodnaDatoteka);
+    std::ofstream izhodnaDatotekaObjekt(izhodnaDatoteka);
 
-    int N = 0;
-    indata >> N;
+    int stTock;
+    vhodnaDatotekaObjekt >> stTock;
 
-    std::vector<double> x(N);
-    std::vector<double> f(N);
+    std::vector<double> x(stTock);
+    std::vector<double> f(stTock);
 
-    for (int i = 0; i < N; ++i) {
-        double value1, value2;
-        char colon;
-        indata >> value1 >> colon >> value2;
-        x[i] = value1;
-        f[i] = value2;
-    }//for zanka po vrsticah
+    for (int i = 0; i < stTock; ++i) {
+        double ID, vrednost1, vrednost2;
+        char dvopicje;
 
-    indata.close();
+        vhodnaDatotekaObjekt >> ID >> dvopicje >> vrednost1 >> vrednost2;
 
-    double h = std::abs(x[1] - x[0]);
-    double naprej = (-3 * f[0] + 4 * f[1] - f[2]) / std::abs(x[2] - x[0]);//shema naprej
-
-    std::vector<double> odvodi = {naprej};
-
-    for (int i = 1; i < N - 1; ++i) {
-        double centralna = (f[i + 1] - f[i - 1]) / (2 * h);
-        odvodi.push_back(centralna);
-    }//centralna diferenčna shema
-
-    double nazaj = (3 * f[N - 1] - 4 * f[N - 2] + f[N - 3]) / (2 * std::abs(x[N - 1] - x[N - 2]));//shema nazaj
-    odvodi.push_back(nazaj);
-
-    //zapišemo v novo datoteko
-    for (double value : odvodi) {
-        outdata << value << '\n';
+        x[i] = vrednost1;
+        f[i] = vrednost2;
     }
 
-    outdata.close();//zapremo datoteko
+    vhodnaDatotekaObjekt.close();
+
+    double h = std::abs(x[1] - x[2]);
+    double odvodNaprej = (-3 * f[0] + 4 * f[1] - f[2]) / std::abs(x[2] - x[0]);
+
+    std::vector<double> odvodi = {odvodNaprej};
+
+    for (int i = 1; i < (stTock - 1); ++i) {
+        double sredina = (f[i + 1] - f[i - 1]) / (2 * h);
+        odvodi.push_back(sredina);
+    }
+
+    double odvodNazaj = (3 * f[stTock - 1] - 4 * f[stTock - 2] + f[stTock - 3]) / (2 * std::abs(x[stTock - 1] - x[stTock - 2]));
+    odvodi.push_back(odvodNazaj);
+
+    for (double vrednost : odvodi) {
+        izhodnaDatotekaObjekt << vrednost << '\n';
+    }
+
+    izhodnaDatotekaObjekt.close();
 
     return 0;
 }
