@@ -8,6 +8,7 @@
 #include <chrono>
 #include <omp.h>
 #include <ctime>
+#include <unistd.h>
 
 
 using namespace std;
